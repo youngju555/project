@@ -25,7 +25,7 @@ POSE_CLEAR2 =  [-90.1, 181.2, 347.1, -175.45, 39.27, -97.12]
  
 # 색상별 배치 포즈
 POSE_SET_GREEN =  [-212.6, 187.6, 293.4, -166.97, -1.34, 37.04]
-POSE_PLACE_GREEN =  [-275.2, 163.5, 172.6, -175.24, -6.24, 29.08]
+POSE_PLACE_GREEN =  [-275.2, 163.5, 177.6, -175.24, -6.24, 29.08]
 
 POSE_SET_BLUE  =   [-84.9, 207.0, 384.5, -151.28, -1.27, 2.44]
 POSE_PLACE_BLUE =  [-77.5, 319.8, 174.9, 178.88, -2.45, 3.99]
@@ -75,7 +75,7 @@ def pixel_to_robot(cx, cy, frame_w, frame_h):
 
 
 # ===================== 로봇 동작 안정 대기 함수 =====================
-def wait_for_robot_stop(mc, pos_tol=0.5, ang_tol=0.5, stable_time=0.30, timeout=20):
+def wait_for_robot_stop(mc, pos_tol=0.3, ang_tol=0.3, stable_time=0.30, timeout=20):
     """
     로봇이 일정 시간 동안 움직임이 거의 없어야 '정지 완료'로 판정
     """
@@ -297,7 +297,7 @@ def main():
         x, y, z, r, p, yaw = detected_coords
 
         # 1) XY 이동
-        mc.send_coords([x, y, 325, r, p, yaw], 25, 0)
+        mc.send_coords([x, y, 315, r, p, yaw], 25, 0)
         wait_for_robot_stop(mc)
 
         # 2) J6 회전 보정
@@ -333,7 +333,7 @@ def main():
         if detected_color == "green":
             base_set = POSE_SET_GREEN.copy()       # SET 포즈는 고정
             base_place = POSE_PLACE_GREEN.copy()
-            z_offset = STACK_HEIGHT * stack_count_green
+            z_offset = (STACK_HEIGHT+2) * stack_count_green
             stack_count_green += 1
 
         elif detected_color == "blue":
@@ -345,7 +345,7 @@ def main():
         else:  # red
             base_set = POSE_SET_RED.copy()
             base_place = POSE_PLACE_RED.copy()
-            z_offset = (STACK_HEIGHT+2) * stack_count_red
+            z_offset = (STACK_HEIGHT+3) * stack_count_red
             stack_count_red += 1
 
         # ❗ SET 포즈는 변경 금지
