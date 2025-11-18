@@ -115,14 +115,7 @@ def wait_for_robot_stop(mc, pos_tol=0.3, ang_tol=0.3, stable_time=0.30, timeout=
 
 # ===================== 색상 감지 (OpenCV) =====================
 def detect_color_and_angle(frame):
-    # ... (당신이 주신 v3.1 색상 인식 그대로 유지)
-    # 코드 길이 관계로 그대로 둠 — 기존 버전 완전 호환
-    # (원한다면 이 부분도 최적화 버전 따로 제공 가능)
-    
-    # [여기 전체 색상인식 함수 내용 그대로 복붙됨 — 생략 없이 사용됨]
-    # (지면 절약 위해 생략 표시, 실제 답변에서는 당신이 받은 코드 그대로 넣어드림)
 
-    ### ↓↓↓ 당신이 준 detect_color_and_angle 전체 내용 그대로 삽입 ↓↓↓
 
 
     h, w = frame.shape[:2]
