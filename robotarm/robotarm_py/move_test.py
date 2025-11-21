@@ -1,0 +1,55 @@
+# -*- coding: utf-8 -*-
+"""
+MyCobot 320 M5 - 수동 캘리브레이션 테스트
+------------------------------------------------
+1️⃣ 토크 해제 → 로봇 팔을 손으로 움직이기
+2️⃣ 원하는 자세에서 Enter 키 입력
+3️⃣ 현재 좌표를 send_coords() 포맷으로 출력
+"""
+
+import time
+from pymycobot.mycobot320 import MyCobot320
+
+# ---------------------------------------------
+# 기본 설정
+# ---------------------------------------------
+PORT = "/dev/ttyACM0"   # 실제 연결된 포트 확인 필요
+BAUD = 115200
+
+mc = MyCobot320(PORT, BAUD)
+time.sleep(0.5)
+# mc.power_off()
+mc.power_on()
+
+print("🔌 로봇 연결 완료")
+
+# ---------------------------------------------
+# 토크 해제 (수동 조정 가능)
+# ---------------------------------------------
+# mc.get_robot_status()
+# print(mc.get_robot_status())
+# time.sleep(5)
+mc.send_angles([0, 0, 0, 0, 0, 0], 30)
+time.sleep(3)
+mc.send_coords([68.5, -218.8, 336.7, -176.04, 1.64, 91.65], 20, 0)
+print(mc.get_coords())
+time.sleep(5)
+# mc.get_servo_status()
+# print(mc.get_servo_status())
+# time.sleep(5)
+# mc.send_coords([154.9, -29.8, 521.4, -90.7, 3.55, -94.23],20,1)
+
+# ---------------------------------------------
+# 현재 좌표 읽기
+# ---------------------------------------------
+
+coords = mc.get_coords()
+angles = mc.get_angles()
+
+print("\n📍 현재 로봇 위치 정보:")
+print(f"  ➤ 좌표 (coords): {coords}")
+print(f"  ➤ 조인트각 (angles): {angles}")
+
+# ---------------------------------------------
+# send_coords 포맷 출력
+# ---------------------------------------------

@@ -1,0 +1,20 @@
+local_costmap:
+  global_frame: odom
+  robot_base_frame: base_footprint
+  update_frequency: 5.0
+  publish_frequency: 2.0
+  rolling_window: true
+
+  width: 3.0
+  height: 3.0
+  resolution: 0.02
+  transform_tolerance: 1.2
+
+  # 장애물 회피 반경 확장
+  inflation_radius: 0.2         # 기존 0.02 → 회피 여유 공간 확보
+
+  plugins:
+    - {name: static_layer,    type: "costmap_2d::StaticLayer"}
+    - {name: obstacle_layer,  type: "costmap_2d::ObstacleLayer"}
+    - {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+
